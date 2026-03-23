@@ -200,24 +200,35 @@ export default class PathfindingVisualizer extends Component {
 
     return (
       <>
-        <button onClick={() => this.clear()}>
-          Clear
-        </button>
-        <button onClick={() => this.visualizeDijkstra()}>
-          Visualize Dijkstra's Algorithm
-        </button>
-        <button onClick={() => this.visualizeAstar()}>
-  Visualize A*
-</button>
-        <button onClick={() => this.removeStartNode()}>
-          Change start node
-        </button>
-        <button onClick={() => this.insertWall()}>
-          {WallButtonText}
-        </button>
-        <button onClick={() => this.ModifyWeight()}>
-          {ModifyWeightText}
-        </button>
+  <div className="navbar">
+    <h2 className="title">Pathfinding Visualizer</h2>
+
+    <div className="controls">
+      <button onClick={() => this.visualizeDijkstra()}>
+        Dijkstra
+      </button>
+
+      <button onClick={() => this.visualizeAstar()}>
+        A*
+      </button>
+
+      <button onClick={() => this.insertWall()}>
+        {WallButtonText}
+      </button>
+
+      <button onClick={() => this.ModifyWeight()}>
+        {ModifyWeightText}
+      </button>
+
+      <button onClick={() => this.removeStartNode()}>
+        Change Start
+      </button>
+
+      <button onClick={() => this.clear()}>
+        Clear
+      </button>
+    </div>
+  </div>
         <div className="grid">
           {grid.map((row, rowIdx) => {
             return (

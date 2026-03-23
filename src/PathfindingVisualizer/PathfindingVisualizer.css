@@ -1,3 +1,45 @@
 .grid {
   margin: 100px 0 0;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+body {
+  margin: 0;
+  background: #0f172a;
+  font-family: 'Poppins', sans-serif;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #020617;
+  padding: 15px 30px;
+  color: white;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.title {
+  font-size: 22px;
+  font-weight: bold;
+  color: #38bdf8;
+}
+
+.controls button {
+  margin: 0 6px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  background: #1e293b;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.controls button:hover {
+  background: #38bdf8;
+  color: black;
+  transform: scale(1.05);
 }
