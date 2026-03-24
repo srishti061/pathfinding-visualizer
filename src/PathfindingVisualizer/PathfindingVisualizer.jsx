@@ -16,6 +16,7 @@ export default class PathfindingVisualizer extends Component {
     this.state = {
       grid: [],
       mouseIsPressed: false,
+      selectedAlgo: null,
       changingStart: false,
       type: "",
       WallButtonText: "Insert Wall",
@@ -194,9 +195,29 @@ export default class PathfindingVisualizer extends Component {
           <h2 className="title">Pathfinding Visualizer</h2>
 
           <div className="controls">
-            <button onClick={() => this.visualizeDijkstra()}>Dijkstra</button>
+            <button
+              className={
+                this.state.selectedAlgo === "dijkstra" ? "active-btn" : ""
+              }
+              onClick={() => {
+                this.setState({ selectedAlgo: "dijkstra" });
+                this.visualizeDijkstra();
+              }}
+            >
+              Dijkstra
+            </button>
 
-            <button onClick={() => this.visualizeAstar()}>A*</button>
+            <button
+              className={
+                this.state.selectedAlgo === "astar" ? "active-btn" : ""
+              }
+              onClick={() => {
+                this.setState({ selectedAlgo: "astar" });
+                this.visualizeAstar();
+              }}
+            >
+              A*
+            </button>
 
             <button onClick={() => this.insertWall()}>{WallButtonText}</button>
 
