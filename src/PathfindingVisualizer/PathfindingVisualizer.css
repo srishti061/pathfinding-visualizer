@@ -64,3 +64,8 @@ body {
 .grid > div {
   display: flex;
 }
+
+input[type="range"] {
+  margin-left: 15px;
+  cursor: pointer;
+}

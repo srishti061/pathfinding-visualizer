@@ -17,6 +17,7 @@ export default class PathfindingVisualizer extends Component {
       grid: [],
       mouseIsPressed: false,
       selectedAlgo: null,
+      speed: 10,
       changingStart: false,
       type: "",
       WallButtonText: "Insert Wall",
@@ -120,33 +121,40 @@ export default class PathfindingVisualizer extends Component {
   }
 
   animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder) {
-    for (let i = 1; i < visitedNodesInOrder.length; i++) {
-      if (stop) return;
-      if (i === visitedNodesInOrder.length - 1) {
+    for (let i = 0; i <= visitedNodesInOrder.length; i++) {
+      if (i === visitedNodesInOrder.length) {
         setTimeout(() => {
-          if (stop) return;
           this.animateShortestPath(nodesInShortestPathOrder);
-        }, 10 * i);
+        }, this.state.speed * i);
         return;
       }
+
       setTimeout(() => {
-        if (stop) return;
         const node = visitedNodesInOrder[i];
-        document.getElementById(`node-${node.row}-${node.col}`).className =
-          "node node-visited";
-      }, 10 * i);
+
+        if (!node.isStart && !node.isFinish) {
+          document.getElementById(`node-${node.row}-${node.col}`).className =
+            "node node-visited";
+        }
+      }, this.state.speed * i);
     }
   }
 
   animateShortestPath(nodesInShortestPathOrder) {
     for (let i = 1; i < nodesInShortestPathOrder.length - 1; i++) {
       if (stop) return;
-      setTimeout(() => {
-        if (stop) return;
-        const node = nodesInShortestPathOrder[i];
-        document.getElementById(`node-${node.row}-${node.col}`).className =
-          "node node-shortest-path";
-      }, 50 * i);
+      setTimeout(
+        () => {
+          if (stop) return;
+          const node = nodesInShortestPathOrder[i];
+
+          if (!node.isStart && !node.isFinish) {
+            document.getElementById(`node-${node.row}-${node.col}`).className =
+              "node node-shortest-path";
+          }
+        },
+        this.state.speed * 2 * i,
+      );
     }
   }
 
@@ -228,6 +236,14 @@ export default class PathfindingVisualizer extends Component {
             <button onClick={() => this.removeStartNode()}>Change Start</button>
 
             <button onClick={() => this.clear()}>Clear</button>
+
+            <input
+              type="range"
+              min="5"
+              max="50"
+              value={this.state.speed}
+              onChange={(e) => this.setState({ speed: Number(e.target.value) })}
+            />
           </div>
         </div>
         <div className="grid">
