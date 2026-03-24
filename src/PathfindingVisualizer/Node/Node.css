@@ -1,16 +1,15 @@
 .node {
-  width: 25px;
-  height: 25px;
-  outline: 1px solid rgb(175, 216, 248);
-  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #222;
 }
 
 .node-finish {
-  background-color: red;
+  background-color: #888;
 }
 
 .node-start {
-  background-color: green;
+  background-color: #ffffff;
 }
 
 .node-visited {
@@ -22,6 +21,12 @@
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
   animation-play-state: running;
+  background-color: #444;
+  transition: background-color 0.2s ease;
+}
+
+.node:hover {
+  transform: scale(1.15);
 }
 
 @keyframes visitedAnimation {
@@ -47,7 +52,7 @@
 }
 
 .node-wall {
-  background-color: rgb(12, 53, 71);
+  background-color: #333;
 }
 
 .node-weight {
@@ -63,6 +68,7 @@
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
   animation-play-state: running;
+  background-color: #ffffff;
 }
 
 @keyframes shortestPath {
