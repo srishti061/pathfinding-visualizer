@@ -21,7 +21,7 @@ export function astar(grid, startNode, finishNode) {
     const neighbors = getUnvisitedNeighbors(currentNode, grid);
 
     for (const neighbor of neighbors) {
-      const tempDistance = currentNode.distance + 1;
+      const tempDistance = currentNode.distance + currentNode.weight;
 
       if (tempDistance < neighbor.distance) {
         neighbor.distance = tempDistance;
