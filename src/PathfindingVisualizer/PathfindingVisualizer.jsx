@@ -71,6 +71,7 @@ export default class PathfindingVisualizer extends Component {
       type: "",
       WallButtonText: "Insert Wall",
       ModifyWeightText: "Modify Node Weights",
+      selectedAlgo: null,
     });
     var id = window.setTimeout(function () {}, 0);
     while (id--) {
@@ -193,6 +194,38 @@ export default class PathfindingVisualizer extends Component {
       this.setState({ type: "", ModifyWeightText: "Modify Node weights" });
     }
   }
+
+  generateMaze() {
+    const walls = [];
+
+    const newGrid = this.state.grid.slice();
+
+    for (let row of newGrid) {
+      for (let node of row) {
+        if (!node.isStart && !node.isFinish) {
+          if (Math.random() < 0.3) {
+            walls.push(node);
+          }
+        }
+      }
+    }
+
+    this.animateMaze(walls);
+  }
+
+  animateMaze(walls) {
+    for (let i = 0; i < walls.length; i++) {
+      const node = walls[i];
+
+      setTimeout(() => {
+        node.isWall = true;
+
+        document.getElementById(`node-${node.row}-${node.col}`).className =
+          "node node-wall";
+      }, 5 * i); // speed of animation
+    }
+  }
+
   render() {
     const { grid, mouseIsPressed, WallButtonText, ModifyWeightText } =
       this.state;
@@ -234,6 +267,8 @@ export default class PathfindingVisualizer extends Component {
             </button>
 
             <button onClick={() => this.removeStartNode()}>Change Start</button>
+
+            <button onClick={() => this.generateMaze()}>Generate Maze</button>
 
             <button onClick={() => this.clear()}>Clear</button>
 
